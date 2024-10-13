@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 1340408632}
   - component: {fileID: 1340408631}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: WinFlag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
