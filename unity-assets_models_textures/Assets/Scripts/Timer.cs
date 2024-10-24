@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -22,5 +22,13 @@ public class Timer : MonoBehaviour
         _time = TimeSpan.FromMinutes(_currentTime);
 
         TimerText.text = string.Format("{0}:{1:00}.{2:00}", _time.Hours, _time.Minutes, _time.Seconds);
+    }
+
+    void OnEnable()
+    {
+        Debug.Log("Enabled/Reset Timer");
+        _currentTime = 0.0F;
+        TimerText.color = Color.white;
+        TimerText.fontSize = 48;
     }
 }

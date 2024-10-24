@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private bool jumpHeld = false;
-    public float SPEED = 3.0F;
-    public float JUMP = 3.0F;
-    public float GRAVITY = -9.81F;
-    public float DeathPlane = -90F;
+    public float SPEED = 2.0F;
+    public float JUMP = 4.0F;
+    public float GRAVITY = -54F;
+    private float DeathPlane = -90F;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,23 +22,24 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Grab player WASD
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        // Grounded gravity
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
-            playerVelocity.y = 0F;
+            playerVelocity.y = GRAVITY / 10;
         }
-
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * SPEED;
         
+        // Horizontal movement
+        Vector3 movementVector = ((transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal")));
+        movementVector = movementVector.normalized * SPEED;
+        
+        controller.Move(movementVector * Time.deltaTime);
 
-        controller.Move(movement * Time.deltaTime * SPEED);
-
-        // Sets direction that we are moving in (if at all)
-        if (movement != Vector3.zero)
-        {
-            gameObject.transform.forward = movement;
-        }
-
+        // Jumping Logic
         if (Input.GetButtonDown("Jump"))
         {
             jumpHeld = true;
@@ -46,15 +47,19 @@ public class NewBehaviourScript : MonoBehaviour
         if (Input.GetButtonUp("Jump"))
         {
             jumpHeld = false;
+            playerVelocity.y = playerVelocity.y > 0 ? 0 : playerVelocity.y;
         }
+
         if (groundedPlayer && jumpHeld)
         {
             playerVelocity.y += Mathf.Sqrt(JUMP * -3.0F * GRAVITY);
         }
 
+        // Applies Velocity + Gravity
         playerVelocity.y += GRAVITY * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
+        // If you're below the Death Plane, respawn
         if (this.transform.position.y < DeathPlane)
         {
             this.transform.position = new Vector3(0, 120f, 0);
