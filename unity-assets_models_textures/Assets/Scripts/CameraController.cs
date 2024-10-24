@@ -20,15 +20,26 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         // Get x position of mouse
         float horizontal = Input.GetAxis("Mouse X") * mouseSensitivity;
         float vertical = Input.GetAxis("Mouse Y") * mouseSensitivity;
         
-        // Rotate pivot
+        // Rotate player and pivot
         player.Rotate(0, horizontal, 0);
         pivot.Rotate(-vertical, 0, 0);
+
+        // Limit vertical camera rotation
+        if (pivot.rotation.eulerAngles.x > 50f && pivot.rotation.eulerAngles.x < 180)
+        {
+            pivot.rotation = Quaternion.Euler(50f, 0, 0);
+        }
+
+        if (pivot.rotation.eulerAngles.x > 180f && pivot.rotation.eulerAngles.x < 335f)
+        {
+            pivot.rotation = Quaternion.Euler(335f, 0, 0);
+        }
         
         // Move camera around pivot with offset
         float desiredYAngle = player.eulerAngles.y;
@@ -40,6 +51,12 @@ public class CameraController : MonoBehaviour
         transform.position = pivot.position - (rotation * CameraOffset);
 
         // this.transform.position = pivot.position - CameraOffset;
+
+        // Ensures camera never goes below the player
+        if (transform.position.y < player.position.y - 0.5f)
+        {
+            transform.position = new Vector3(transform.position.x, player.position.y - 0.5f, transform.position.z);
+        }
 
         this.transform.LookAt(pivot);
     }
