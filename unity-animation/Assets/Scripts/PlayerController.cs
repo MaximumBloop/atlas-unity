@@ -8,16 +8,17 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public Transform pivot;
     public GameObject gameModel;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    private bool jumpHeld = false;
+    public Vector3 playerVelocity;
+    internal bool groundedPlayer;
+    internal bool jumpHeld = false;
     public float MOVEMENT_SPEED = 2.0F;
     public float ROTATION_SPEED = 0.5F;
     public float JUMP = 4.0F;
-    public float GRAVITY = -54F;
-    private float DeathPlane = -90F;
+    public const float GRAVITY = -54F;
+    private const float DeathPlane = -90F;
+    internal const float TerminalVelocity = -90f;
 
-    private PlayerAnimController animatorController;
+    internal PlayerAnimController animatorController;
 
     // Start is called before the first frame update
     void Start()
@@ -42,17 +43,10 @@ public class PlayerController : MonoBehaviour
         // Horizontal movement
         Vector3 movementVector = ((transform.forward * Input.GetAxisRaw("Vertical")) + (transform.right * Input.GetAxisRaw("Horizontal")));
         
-        if (movementVector.magnitude >= 0.1f)
+         if (movementVector.magnitude >= 0.1f)
         {
-            if (groundedPlayer)
-            {
-                animatorController.AnimateRun();
-            }
             movementVector = movementVector.normalized * MOVEMENT_SPEED;
             controller.Move(movementVector * Time.deltaTime);
-        } else
-        {
-            animatorController.AnimateIdle();
         }
 
         // Jumping Logic
@@ -75,10 +69,10 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y += GRAVITY * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        // Check if we should be playing Jump animation
-        if (jumpHeld && playerVelocity.y > 0)
+        // Prevents player from falling infinitely fast
+        if (playerVelocity.y <= TerminalVelocity)
         {
-            animatorController.AnimateJump();
+            playerVelocity.y = TerminalVelocity;
         }
 
         // If you're below the Death Plane, respawn
