@@ -85,7 +85,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: FallingToImpact
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: splat
@@ -135,7 +135,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: GettingUpToIdle
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
@@ -427,6 +427,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1109 &4140424475839596929
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GettingUpToIdle
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: idle
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 736593530416677431}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
 --- !u!1107 &4528251503133768097
 AnimatorStateMachine:
   serializedVersion: 6
@@ -441,7 +458,7 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8895505523199134977}
-    m_Position: {x: -190, y: 10, z: 0}
+    m_Position: {x: -320, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2278497466369221550}
     m_Position: {x: 30, y: -60, z: 0}
@@ -451,7 +468,10 @@ AnimatorStateMachine:
     m_Position: {x: -240, y: -90, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
-  m_StateMachineTransitions: {}
+  m_StateMachineTransitions:
+  - first: {fileID: 519195208418626698}
+    second:
+    - {fileID: 4140424475839596929}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: -180, z: 0}
   m_EntryPosition: {x: 50, y: 160, z: 0}
@@ -489,7 +509,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
+  m_Name: ImpactToGettingUp
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8517135325089024479}
