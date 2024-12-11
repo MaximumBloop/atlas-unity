@@ -30,7 +30,7 @@ public class StateManager : MonoBehaviour
         };
 
         foreach(BaseState s in states){
-            s.Init(this, player, player.GetComponent<PlayerAnimController>(), player.GetComponent<PlayerController>());
+            s.Init(this, player, player.GetComponentInChildren<PlayerAnimController>(), player.GetComponent<PlayerController>());
         }
 
         currentState = states[0];

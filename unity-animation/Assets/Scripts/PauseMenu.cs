@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public Canvas PauseCanvas;
-    private bool paused = false;
+    private bool paused;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Resume();
     }
 
     // Update is called once per frame

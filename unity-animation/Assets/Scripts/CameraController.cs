@@ -28,6 +28,11 @@ public class CameraController : MonoBehaviour
         // Get x position of mouse
         float horizontal = Input.GetAxis("Mouse X") * mouseSensitivity;
         float vertical = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        if (PlayerPrefs.GetInt("InvertYAxis") == 1)
+        {
+            vertical = -vertical;
+            Debug.Log("Axis Inverted");
+        }
         
         // Rotate pivot
         pivot.Rotate(-vertical, 0, 0);

@@ -8,8 +8,8 @@ public class SplatState : BaseState
     {
         Debug.Log("SPLATTED");
 
-        // Transition to 'Splat' if we hit the ground
-        
+        // Get up from ground after a bit of time
+        StateManagerInstance.SwitchState((int)StateManager.States.RecoverState);
     }
 
     public override void EnterState(){
