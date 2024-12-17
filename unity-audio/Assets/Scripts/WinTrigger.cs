@@ -8,6 +8,7 @@ public class WinTrigger : MonoBehaviour
     public Canvas winCanvas;
     public Canvas pauseCanvas;
     public GameObject gameManager;
+    public GameObject camera;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,8 @@ public class WinTrigger : MonoBehaviour
             winCanvas.gameObject.SetActive(true);
             pauseCanvas.gameObject.SetActive(false);
             gameManager.SetActive(false);
+            camera.GetComponent<AudioSource>().Stop();
+            this.GetComponent<AudioSource>().Play();
             
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

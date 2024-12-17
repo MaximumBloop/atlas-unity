@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class RunState : BaseState
 {
+    private AudioSource runAudioSource;
+
+    void Start()
+    {
+        
+    }
     public override void responseUpdate()
     {
         Debug.Log("Run");
@@ -26,9 +32,14 @@ public class RunState : BaseState
 
         // Start animating
         AnimatorInstance.AnimateRun();
+
+        // Play footstep noises
+        runAudioSource = fetchAudioSourceComponent("footsteps_running_rock");
+        runAudioSource?.Play();
     }
 
     public override void ExitState(){
         Debug.Log("Exit Run");
+        runAudioSource?.Stop();
     }
 }

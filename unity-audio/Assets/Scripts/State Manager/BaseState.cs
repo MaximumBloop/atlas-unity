@@ -21,4 +21,18 @@ public abstract class BaseState
     public abstract void responseUpdate();
     public abstract void EnterState();
     public abstract void ExitState();
+
+    
+    protected AudioSource fetchAudioSourceComponent(string name)
+    {
+        AudioSource [] sources = playerInstance.GetComponents<AudioSource>();
+        foreach (AudioSource source in sources)
+        {
+            if (source.clip.name == name)
+            {
+                return source;
+            }
+        }
+        return null;
+    }
 }

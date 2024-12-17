@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PauseMenu : MonoBehaviour
 {
     public Canvas PauseCanvas;
     private bool paused;
+    public AudioMixerSnapshot[] snapshots;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        snapshots[1].TransitionTo(0.0f);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -45,6 +48,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         PauseCanvas.gameObject.SetActive(false);
+        snapshots[0].TransitionTo(0.5f);
     }
 
     public void Restart()

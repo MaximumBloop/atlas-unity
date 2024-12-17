@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SplatState : BaseState
 {
+    AudioSource landingAudioSource;
     public override void responseUpdate()
     {
         Debug.Log("SPLATTED");
@@ -17,6 +18,8 @@ public class SplatState : BaseState
 
         // Start animating
         AnimatorInstance.AnimateSplat();
+        landingAudioSource = fetchAudioSourceComponent("footsteps_landing_grass");
+        landingAudioSource?.Play();
     }
 
     public override void ExitState(){
