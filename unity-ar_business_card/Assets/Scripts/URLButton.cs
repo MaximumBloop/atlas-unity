@@ -17,8 +17,8 @@ public abstract class URLButton : MonoBehaviour
         rect.anchoredPosition = Vector2.zero;
         rect.localScale = Vector2.zero;
 
-        LeanTween.moveLocal(this.gameObject, desiredPos, 0.1f);
-        LeanTween.scale(rect, desiredScale, 0.1f);
+        LeanTween.moveLocal(this.gameObject, desiredPos, 0.5f);
+        LeanTween.scale(rect, desiredScale, 0.5f);
     }
 
     public void OpenURL()
