@@ -1,3 +1,5 @@
+![3D Platformer](https://github.com/user-attachments/assets/4d195f4f-17a9-493b-9adb-87860d328595)
+
 # atlas-unity
 ## Description
 A project made for Atlas School Tulsa that showcases my total knowledge on the Unity 2021, Unity 2022, and Unity 6 versions of the Unity engine. Projects demonstrate the following technical knowledge...
